@@ -1,30 +1,15 @@
-// main: ../../style.scss
-.row {
-  &:after {
-  content: '';
-  clear: both;
-  display: table;
-  }
-}
-
-[class*='ddd-col-'] {
-   float: left;
-   padding: 15px;
-   width: 100%;
-}
-
 a.reset_variations {
-   display: none;
+  display: none;
 }
 
 .woocommerce-breadcrumb {
-   display: none;
+  display: none;
 }
 
 .site-header {
-   margin-bottom: 40px;
+  margin-bottom: 40px;
 }
 
 .widget_product_search {
-   display: none;
+  display: none;
 }

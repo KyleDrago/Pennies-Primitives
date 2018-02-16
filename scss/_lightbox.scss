@@ -1,0 +1,86 @@
+.lightbox-background {
+  position: fixed;
+  background: $color-black;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: calc(100vh);
+  overflow: scroll;
+  -ms-overflow-style: none;
+  box-sizing: border-box;
+  display: none;
+  padding: 20px;
+}
+
+.lightbox-background::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
+}
+
+.lightbox-button-close {
+  position: fixed;
+  top: 0;
+  right: 0;
+  background: $color-black;
+  width: 40px;
+  height: 45px;
+  cursor: pointer;
+
+  p {
+    font-family: 'Helvetica';
+    font-size: 38px;
+    color: $color-white;
+    margin: 0;
+    text-align: center;
+    line-height: 45px;
+  }
+
+  :hover {
+    background: $color-gray;
+  }
+}
+
+#lightbox-background {
+  display: none;
+}
+
+.lightbox-pattern-img {
+  padding: 5px;
+  width: 100%;
+  cursor: pointer;
+  border: 2px solid $color-black;
+}
+
+.masonry {
+  column-count: 1;
+  column-gap: 2.5px;
+}
+
+.lightbox-pattern-img:hover {
+  border: 2px solid $color-white;
+}
+
+.pattern-lightbox {
+  img {
+    width: 100%;
+    margin: auto;
+    cursor: pointer;
+  }
+}
+
+@media only screen and (min-width: $break-phone) {
+  .masonry {
+    column-count: 2;
+  }
+}
+
+@media only screen and (min-width: $break-desktop) {
+  .lightbox-background {
+    padding: 70px 110px;
+  }
+
+  .masonry {
+    column-count: 5;
+  }
+}

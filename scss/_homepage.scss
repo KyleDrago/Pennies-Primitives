@@ -1,0 +1,47 @@
+.home-page-wrapper {
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: -50px;
+  padding: 0;
+
+  img {
+    margin-bottom: 25px;
+    width: 100%;
+  }
+}
+
+.homepage-image-mobile {
+  display: block;
+}
+
+.homepage-image-tablet {
+  display: none;
+}
+
+
+@media only screen and (min-width: $break-phone) {
+  .home-page-wrapper {
+    img {
+      float: left;
+      margin-bottom: 5px;
+      margin-right: 30px;
+      width: 50%;
+    }
+  }
+
+  .homepage-image-mobile {
+    display: none;
+  }
+
+  .homepage-image-tablet {
+    display: block;
+  }
+}
+
+@media only screen and (min-width: $break-desktop) {
+  .home-page-wrapper {
+    img {
+      width: 35%;
+    }
+  }
+}

@@ -1,0 +1,41 @@
+.input-warning {
+  font-size: rem(16px);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+a {
+  font-family: 'Butler';
+}
+
+p {
+  font-family: 'Goudy';
+}
+
+@media only screen and (min-width: $break-phone) {
+  h1 {
+    font-size: rem(48px);
+  }
+
+  p {
+    font-size: rem(18px);
+  }
+
+  a {
+    font-size: rem(18px);
+  }
+
+  .site-title {
+    a {
+      font-size: rem(42px);
+    }
+  }
+}
+
+@media only screen and (min-width: $break-desktop) {
+
+}

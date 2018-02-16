@@ -1,0 +1,21 @@
+.footer-nav {
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    }
+
+  a {
+    :hover {
+      color: $color-green;
+    }
+  }
+}
+
+@media only screen and (min-width: $break-phone) {
+
+}
+
+@media only screen and (min-width: $break-desktop) {
+
+}

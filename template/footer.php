@@ -16,7 +16,7 @@
 
 	<footer id="colophon" class="site-footer" role="contentinfo">
 		<div class="col-full">
-
+				<p>test</p>
 		</div><!-- .col-full -->
 	</footer><!-- #colophon -->
 

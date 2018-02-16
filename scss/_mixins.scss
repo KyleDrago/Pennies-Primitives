@@ -1,0 +1,61 @@
+// main: ../../style.scss
+@mixin large-text {
+  font: {
+    family: Arial;
+    size: rem(20px);
+    weight: bold;
+  }
+  color: $gray;
+}
+
+@mixin small-text {
+  font: {
+    family: Arial;
+    size: rem(20px);
+    weight: bold;
+  }
+  color: $gray;
+}
+
+@mixin header-large-text {
+  font: {
+    family: Arial;
+    size: rem(20px);
+    weight: bold;
+  }
+  color: $gray;
+}
+
+@mixin header-small-text {
+  font: {
+    family: Arial;
+    size: rem(20px);
+    weight: bold;
+  }
+  color: $gray;
+}
+
+@mixin no-margin-padding {
+  margin: 0;
+  padding: 0;
+}
+
+@mixin no-bullets {
+  list-style: none;
+}
+
+@mixin center($position) {
+  position: absolute;
+
+  @if $position == 'vertical' {
+    top: 50%;
+    transform: translateY(-50%);
+  } @else if $position == 'horizontal' {
+    left: 50%;
+    transform: translateX(-50%);
+  } @else if $position == 'both' {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}

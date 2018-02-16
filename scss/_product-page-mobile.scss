@@ -1,0 +1,56 @@
+// main: ../../style.scss
+.pattern-select-wrapper {
+    width: 100%;
+    label {
+        display: block;
+    }
+    select {
+        margin-bottom: 20px;
+        width: 100%;
+    }
+    img {
+      width: 100%;
+      margin-bottom: 15px;
+    }
+}
+
+.color-select-wrapper {
+    label {
+        display: block;
+    }
+    select {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    img {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+}
+
+.personalized-select-wrapper {
+  label {
+    display: block;
+  }
+  select {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  input {
+    width: 100%;
+    height: 35px;
+    margin-bottom: 13px;
+  }
+}
+
+#mounting-style {
+    width: 100%;
+}
+
+.input-warning {
+  // color: Red;
+  // display: none;
+  top: -54%;
+  opacity: 0;
+  position: absolute;
+}

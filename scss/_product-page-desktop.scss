@@ -1,0 +1,18 @@
+// main: ../../style.scss
+$width: 190px;
+.pattern-select-wrapper,
+.color-select-wrapper {
+    width: $width;
+    img {
+        width: $width;
+        left: 147%;
+    }
+}
+
+.personalized-select-wrapper {
+  width: $width;
+}
+
+#mounting-style {
+    width: $width;
+}

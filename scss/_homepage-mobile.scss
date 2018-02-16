@@ -1,0 +1,19 @@
+// main: ../../style.scss
+.home-page-wrapper {
+    margin-top: -50px;
+    margin-left: 0;
+    margin-right: 0;
+    padding: 0;
+    img {
+        width: 100%;
+        margin-bottom: 25px;
+    }
+}
+
+.homepage-image-mobile {
+    display: block;
+}
+
+.homepage-image-tablet {
+    display: none;
+}

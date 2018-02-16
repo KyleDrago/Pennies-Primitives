@@ -1,0 +1,49 @@
+/*!
+Theme Name:   	Pennies Primitives
+Theme URI:
+Author:       	Kyle Drago (Drago Design & Development)
+Author URI:
+Template:     	storefront
+Description:  	This is a child theme for storefront made specifically for Pennies Primitives
+Version:      	1.0.0
+License:      	GNU General Public License v2 or later
+License URI:  	http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain:  	storefront
+Tags:
+This theme, like WordPress, is licensed under the GPL.
+Use it to make something cool, have fun, and share what you've learned with others.
+Storefront is based on Underscores http://underscores.me/, (C) 2012-2014 Automattic, Inc.
+Resetting and rebuilding styles have been helped along thanks to the fine work of
+Eric Meyer http://meyerweb.com/eric/tools/css/reset/index.html
+along with Nicolas Gallagher and Jonathan Neal http://necolas.github.com/normalize.css/
+FontAwesome License: SIL Open Font License - http://scripts.sil.org/OFL
+Images License: GNU General Public License v2 or later
+*/
+@import '_vars.scss';
+@import '_functions.scss';
+@import '_mixins.scss';
+@import '_overrides.scss';
+
+@import '_lightbox-mobile.scss';
+@import '_product-page-mobile.scss';
+@import '_homepage-mobile.scss';
+@import '_footer-mobile.scss';
+@import '_typography-mobile.scss';
+
+@media only screen and (min-width: $break-phone) {
+    @import '_tablets.scss';
+
+    @import '_lightbox-tablet.scss';
+    @import '_product-page-tablet.scss';
+    @import '_homepage-tablet.scss'; 
+
+    @import '_typography-tablet.scss';
+}
+
+@media only screen and (min-width: $break-desktop) {
+    @import '_desktops.scss';
+
+    @import '_lightbox-desktop.scss';
+    @import '_product-page-desktop.scss';
+    @import '_homepage-desktop.scss';
+}

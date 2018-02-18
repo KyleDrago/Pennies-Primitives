@@ -22,7 +22,8 @@ function sf_child_theme_dequeue_style() {
 /**
  * Note: DO NOT! alter or remove the code above this text and only add your custom PHP functions below this text.
  */
-
+ // add_filter( 'woocommerce_resize_images','__return_false' );
+ // add_filter( 'woocommerce_background_image_regeneration','__return_false' );
 
   // function console_log( $data ){
   //   echo '<script>';
@@ -30,14 +31,14 @@ function sf_child_theme_dequeue_style() {
   //   echo '</script>';
   // }
 
- $theme_dir = get_stylesheet_directory_uri();
- $js_file = $theme_dir . '/js/scripts.js';
-
- // console_log($js_file);
-
- wp_register_script('3dcustom', $js_file, $deps, null);
- wp_localize_script('3dcustom', 'WPURL', array( 'templateUrl' => wp_upload_dir() ));
- wp_enqueue_script( '3dcustom' );
+function ddd_conditional_serve() {
+  if (is_product()) {
+    wp_register_script('3dcustom', get_stylesheet_directory_uri().'/js/main.js', false, null, true);
+    wp_localize_script('3dcustom', 'WPURL', array( 'templateUrl' => wp_upload_dir() ));
+    wp_enqueue_script('3dcustom');
+  }
+}
+add_action( 'wp_enqueue_scripts', 'ddd_conditional_serve' );
 
  require 'custom-functions.php';
  require 'products/curtains.php';
@@ -51,7 +52,12 @@ function sf_child_theme_dequeue_style() {
  remove_image_size('medium');
  remove_image_size('thumbnail');
 
- add_filter('woocommerce_resize_images', 'stop_wc_resize');
- function stop_wc_resize() {
-    return false;
- }
+ add_filter( 'woocommerce_resize_images','__return_false' );
+ add_filter( 'woocommerce_background_image_regeneration','__return_false' );
+
+ // add_filter( 'woocommerce_resize_images','__return_false' );
+ // add_filter( 'woocommerce_background_image_regeneration','__return_false' );
+ // add_filter('woocommerce_resize_images', 'stop_wc_resize');
+ // function stop_wc_resize() {
+ //    return false;
+ // }

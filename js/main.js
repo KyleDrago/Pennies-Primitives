@@ -15,6 +15,7 @@ var dddVars = {
   body: document.body,
 };
 
+
 var pattern = {
   selected: dddVars.patternSelectBox.value,
 };

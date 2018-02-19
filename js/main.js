@@ -3,103 +3,90 @@
 /* global document */
 /* global WPURL */
 
-var dddVars = {
-  colorSelectBox: document.getElementById('color-select-box'),
-  colorPreviewImage: document.getElementById('color-preview-image'),
-  patternPreviewImage: document.getElementById('pattern-preview-image'),
-  patternSelectBox: document.getElementById('pattern-select-box'),
-  uploadDir: WPURL.templateUrl.baseurl + '/',
-  lightbox: document.getElementById('lightbox-background'),
-  lightboxButton: document.getElementById('lightbox-button-close'),
-  lightboxPatternImages: document.getElementsByClassName('lightbox-pattern-img'),
+var dddGVAR = {
   body: document.body,
+  uploadDir: WPURL.templateUrl.baseurl + '/',
+  patternSelected: null,
 };
 
-var pattern = {
-  selected: dddVars.patternSelectBox.value,
+var dddColor = {
+  selectBox: document.getElementById('color-select-box'),
+  previewImage: document.getElementById('color-preview-image'),
+  selectBoxSetup: function () {
+    dddColor.previewImage.src = dddGVAR.uploadDir + dddColor.selectBox.value + '.jpg';
+  },
+  init: function () {
+    dddColor.selectBox.addEventListener('input', dddColor.selectBoxSetup);
+  },
 };
 
-var dddFunc = {
-  colorSelectSetup: function () {
-    dddVars.colorPreviewImage.src = dddVars.uploadDir + dddVars.colorSelectBox.value + '.jpg';
+var dddPattern = {
+  selectBox: document.getElementById('pattern-select-box'),
+  previewImage: document.getElementById('pattern-preview-image'),
+  selectBoxSetup: function () {
+    dddGVAR.patternSelected = dddPattern.selectBox.value;
+    dddPattern.previewImage.src = dddGVAR.uploadDir + dddPattern.selectBox.value + '.jpg';
+  },
+  init: function () {
+    dddPattern.selectBox.addEventListener('input', dddPattern.selectBoxSetup);
+  },
+};
+
+var dddLightbox = {
+  lightbox: document.getElementById('lightbox-background'),
+  closeButton: document.getElementById('lightbox-button-close'),
+  patternImages: document.getElementsByClassName('lightbox-pattern-img'),
+  closeButtonSetup: function () {
+    dddLightbox.lightbox.style.display = 'none';
+    dddGVAR.body.style.overflow = 'scroll';
   },
   patternSelectSetup: function () {
-    dddVars.patternPreviewImage.src = dddVars.uploadDir + dddVars.patternSelectBox.value + '.jpg';
-  },
-  lightboxButtonSetup: function () {
-    dddVars.lightbox.style.display = 'none';
-    dddVars.body.style.overflow = 'scroll';
-  },
-  lightboxPatternSetup: function () {
     var selection = this.dataset.value;
-    dddVars.patternSelectBox.value = selection;
-    pattern.selected = selection;
-    dddVars.patternPreviewImage.src = dddVars.uploadDir + selection + '.jpg';
-    dddVars.lightbox.style.display = 'none';
-    dddVars.body.style.overflow = 'scroll';
+    dddPattern.selectBox.value = selection;
+    dddGVAR.patternSelected = selection;
+    dddPattern.previewImage.src = dddGVAR.uploadDir + selection + '.jpg';
+    dddLightbox.lightbox.style.display = 'none';
+    dddGVAR.body.style.overflow = 'scroll';
   },
-  lightboxSetup: function () {
-    dddVars.body.style.overflow = 'hidden';
-    dddVars.lightbox.style.display = 'block';
-    document.getElementById(pattern.selected).scrollIntoView({ block: 'center' });
+  openLightboxSetup: function () {
+    dddGVAR.body.style.overflow = 'hidden';
+    dddLightbox.lightbox.style.display = 'block';
+    document.getElementById(dddGVAR.patternSelected).scrollIntoView({ block: 'center' });
   },
-};
-
-var dddEL = {
-  colorAddEL: function () {
-    dddVars.colorSelectBox.addEventListener('input', dddFunc.colorSelectSetup);
-  },
-  patternAddEL: function () {
-    dddVars.patternSelectBox.addEventListener('input', dddFunc.patternSelectSetup);
-  },
-  lightboxButtonAddEL: function () {
-    dddVars.lightboxButton.addEventListener('click', dddFunc.lightboxButtonSetup);
-  },
-  lightboxPatternsAddEL: function () {
+  init: function () {
     var i;
-    for (i = 0; i < dddVars.lightboxPatternImages.length; i += 1) {
-      dddVars.lightboxPatternImages[i].addEventListener('click', dddFunc.lightboxPatternSetup);
+    dddLightbox.closeButton.addEventListener('click', dddLightbox.closeButtonSetup);
+    for (i = 0; i < dddLightbox.patternImages.length; i += 1) {
+      dddLightbox.patternImages[i].addEventListener('click', dddLightbox.patternSelectSetup);
     }
-  },
-  lightboxAddEL: function () {
-    dddVars.patternPreviewImage.addEventListener('click', dddFunc.lightboxSetup);
+    dddPattern.previewImage.addEventListener('click', dddLightbox.openLightboxSetup);
   },
 };
 
-dddEL.colorAddEL();
-dddEL.patternAddEL();
-dddEL.lightboxButtonAddEL();
-dddEL.lightboxPatternsAddEL();
-dddEL.lightboxAddEL();
+var dddSecurity = {
+  input: document.getElementById('personalized-text'),
+  warning: document.getElementById('input-warning'),
+  prohibited: ['!', '=', '"', "'", '>', '<', '/', '_', '-', '+', '*', '&', '|', '`', '?'],
+  validateField: function (ipVal) {
+    var arrayString = ipVal.split('');
+    /* eslint prefer-arrow-callback: "off" */
+    arrayString.forEach(function (item) {
+      if (dddSecurity.prohibited.includes(item)) {
+        dddSecurity.input.value = dddSecurity.input.value.substring(0, dddSecurity.input.value.length - 1);
+        dddSecurity.warning.style.opacity = 1;
+        dddSecurity.warning.innerHTML = item + ' Not Allowed';
+      }
+    });
+  },
+  inputSetup: function () {
+    dddSecurity.validateField(dddSecurity.input.value);
+  },
+  init: function () {
+    dddSecurity.input.addEventListener('keyup', dddSecurity.inputSetup);
+  },
+};
 
-// function denyBadChar() {
-//   var personInput = document.getElementById('personalized-text');
-//   var inputWarning = document.getElementById('input-warning');
-//   var prohibited = "!@#$%^&*()+=;-_:`\|'?~./<>,";
-//   personInput.addEventListener('keyup', function() {
-//     var inputValue = personInput.value;
-//
-//     validateField(inputValue);
-//   });
-//   function validateField(ipVal){
-//     var arrayString = ipVal.split("");
-//
-//     arrayString.forEach(function(item){
-//       if(prohibited.indexOf(item) !== -1) {
-//         inputWarning.style.opacity = '1';
-//         inputWarning.innerHTML = item + ' Not Allowed';
-//         personInput.value = "";
-//       } else {
-//         inputWarning.style.opacity = '0';
-//       };
-//     });
-//   };
-// }
-//
-// // denyBadChar();
-// setupColorBox();
-// setupPatternBox();
-// setupLightboxPatterns();
-// setupLightBox();
-// }
-// };
+dddColor.init();
+dddPattern.init();
+dddLightbox.init();
+dddSecurity.init();

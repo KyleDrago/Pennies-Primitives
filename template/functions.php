@@ -33,9 +33,16 @@ function sf_child_theme_dequeue_style() {
 
 function ddd_conditional_serve() {
   if (is_product()) {
-    wp_register_script('3dcustom', get_stylesheet_directory_uri().'/js/main.js', false, null, true);
-    wp_localize_script('3dcustom', 'WPURL', array( 'templateUrl' => wp_upload_dir() ));
-    wp_enqueue_script('3dcustom');
+    global $is_IE;
+    if ($is_IE) {
+      wp_register_script('3dcustomIE', get_stylesheet_directory_uri().'/js/mainIE.js', false, null, true);
+      wp_localize_script('3dcustomIE', 'WPURL', array( 'templateUrl' => wp_upload_dir() ));
+      wp_enqueue_script('3dcustomIE');
+    } else {
+      wp_register_script('3dcustom', get_stylesheet_directory_uri().'/js/main.js', false, null, true);
+      wp_localize_script('3dcustom', 'WPURL', array( 'templateUrl' => wp_upload_dir() ));
+      wp_enqueue_script('3dcustom');
+    }
   }
 }
 add_action( 'wp_enqueue_scripts', 'ddd_conditional_serve' );

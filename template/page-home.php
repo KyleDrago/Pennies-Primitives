@@ -16,4 +16,8 @@ get_header();?>
     <p class='font-test-3'>Aenean commodo pellentesque sapien, eget lobortis felis semper eget. In hac habitasse platea dictumst. Duis accumsan sapien et elit dapibus suscipit. Proin ornare, orci quis posuere laoreet, arcu leo suscipit massa, finibus feugiat mi eros non neque. Etiam sagittis lectus at sem hendrerit placerat consequat id mi. In nunc ipsum, placerat nec lectus sed, aliquam blandit ipsum. Integer mi est, congue non euismod vitae, luctus sit amet ex.</p>
 </div>
 
-<?php get_footer(); ?>
+<?php get_footer();
+
+// $obj = new DDDToolBox();
+//   console_log($obj->getCurrentURL());
+?>

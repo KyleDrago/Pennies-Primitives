@@ -3,8 +3,11 @@
     Template Name: Test Page Template
 */
 
-$imageDir = content_url() . "/uploads/";
-get_header();?>
+// $imageDir = content_url() . "/uploads/";
+// get_header();
+$imageDir = 'test/' ?>
+
+@@include('content.html')
 
 <picture>
   <source
@@ -20,4 +23,4 @@ get_header();?>
 </picture>
 
 
-<?php get_footer(); ?>
+<?php //get_footer(); ?>

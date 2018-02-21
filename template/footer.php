@@ -16,7 +16,7 @@
 
 	<footer id="colophon" class="site-footer" role="contentinfo">
 		<div class="col-full">
-			
+
 		</div><!-- .col-full -->
 	</footer><!-- #colophon -->
 
@@ -24,7 +24,10 @@
 
 </div><!-- #page -->
 
-<?php wp_footer(); ?>
+<?php wp_footer();
+$obj = new DDDToolBox();
+  console_log($obj->getCurrentURL());
+?>
 
 </body>
 </html>

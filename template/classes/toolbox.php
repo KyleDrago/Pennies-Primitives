@@ -3,9 +3,12 @@
 class DDDToolBox
 {
   function getCurrentURL () {
-    // $test = 120;
     $url = '//'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
     return $url;
+  }
+  function getUploadDir () {
+    $dir = '//'.$_SERVER['HTTP_HOST'].'/wp-content/uploads/';
+    return $dir;
   }
 }
 

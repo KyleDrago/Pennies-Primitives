@@ -85,7 +85,18 @@ const dddSecurity = {
   },
 };
 
-dddColor.init();
-dddPattern.init();
-dddLightbox.init();
-dddSecurity.init();
+if (dddColor.selectBox !== null) {
+  dddColor.init();
+}
+
+if (dddPattern.selectBox !== null) {
+  dddPattern.init();
+}
+
+if (dddLightbox.lightbox !== null) {
+  dddLightbox.init();
+}
+
+if (dddSecurity.input !== null) {
+  dddSecurity.init();
+}

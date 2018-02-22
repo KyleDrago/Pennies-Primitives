@@ -10,7 +10,7 @@
 
 function ddd_add_cart_item_data( $cart_item_data, $product_id, $variation_id, $quantity, $select_box, $pid) {
   //Get selection from combo box
-  $value_selected = filter_input(INPUT_POST, $select_box);
+  $value_selected = filter_input(INPUT_POST, $select_box, FILTER_SANITIZE_SPECIAL_CHARS);
   //Check if input is valid
   if($pid !== $product_id) {
     return $cart_item_data;

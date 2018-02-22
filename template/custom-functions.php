@@ -211,27 +211,89 @@ function add_pattern_selection_input($pers) {
 }
 add_action('ddd_add_pattern_selection_input', 'add_pattern_selection_input', 10);
 
-// Change product price -------------------------------------------------------------------------------------------//
-// add_action( 'woocommerce_before_calculate_totals', 'add_custom_item_price', 10 );
-// function add_custom_item_price( $cart_object ) {
-//
-//     foreach ( $cart_object->get_cart() as $item_values ) {
-//
-//         ##  Get cart item data
-//         $item_id = $item_values['data']->id; // Product ID
-//         $original_price = $item_values['data']->price; // Product original price
-//
-//         ## Get your custom fields values
-//         $mounting_style = $item_values['custom_data']['mounting_style'];
-//         // console_log($mounting_style);
-//         // CALCULATION FOR EACH ITEM:
-//         ## Make HERE your own calculation to feet your needs  <==  <==  <==  <==
-//         $new_price = $original_price + 25;
-//
-//         ## Set the new item price in cart
-//         $item_values['data']->price = $new_price;
-//         console_log($item_values['data']->price);
-//     }
-// }
+// Add responsive image ----------------------------------------------------------------------------------//
+// Usage:
 
+function ddd_image_responsive($imageName) {
+  $uploadDir = '//'.$_SERVER['HTTP_HOST'].'/wp-content/uploads/'.'responsive/';
+  $tabletBreakpoint = '(max-width: 768px)';
+  $desktopBreakpoint = '(max-width: 1024px)';
+  // $tabletBreakpoint = ;
+  // $desktopBreakpoint = '1024px';
+  // $uploadDir = $toolBox->getUploadDir().'responsive/';
+  ?>
+  <picture>
+    <source
+    type='image/webp'
+    media='<?php echo $tabletBreakpoint ?>'
+    srcset=
+    '
+    <?php echo $uploadDir.$imageName.'-300px.webp' ?> 300w,
+    <?php echo $uploadDir.$imageName.'-450px.webp' ?> 450w,
+    <?php echo $uploadDir.$imageName.'-600px.webp' ?> 600w,
+    <?php echo $uploadDir.$imageName.'-750px.webp' ?> 750w,
+    '
+    sizes='100vw'
+    >
+    <source
+    type='image/jpeg'
+    media='<?php echo $tabletBreakpoint ?>'
+    srcset=
+    '
+    <?php echo $uploadDir.$imageName.'-300px.jpg' ?> 300w,
+    <?php echo $uploadDir.$imageName.'-450px.jpg' ?> 450w,
+    <?php echo $uploadDir.$imageName.'-600px.jpg' ?> 600w,
+    <?php echo $uploadDir.$imageName.'-750px.jpg' ?> 750w,
+    '
+    sizes='100vw'
+    >
+    <source
+    type='image/webp'
+    media='<?php echo $desktopBreakpoint ?>'
+    srcset=
+    '
+    <?php echo $uploadDir.$imageName.'-900px.webp' ?> 900w
+    '
+    sizes='100vw'
+    >
+    <source
+    type='image/jpeg'
+    media='<?php echo $desktopBreakpoint ?>'
+    srcset=
+    '
+    <?php echo $uploadDir.$imageName.'-900px.jpg' ?> 900w
+    '
+    sizes='100vw'
+    >
+    <source
+    type='image/webp'
+    media='<?php echo $desktopBreakpoint ?>'
+    srcset=
+    '
+    <?php echo $uploadDir.$imageName.'-1050px.webp' ?> 1050w,
+    <?php echo $uploadDir.$imageName.'-1200px.webp' ?> 1200w,
+    <?php echo $uploadDir.$imageName.'-1350px.webp' ?> 1350w,
+    <?php echo $uploadDir.$imageName.'-1500px.webp' ?> 1500w,
+    <?php echo $uploadDir.$imageName.'-1750px.webp' ?> 1750w
+    '
+    sizes='100vw'
+    >
+    <source
+    type='image/jpeg'
+    media='<?php echo $desktopBreakpoint ?>'
+    srcset=
+    '
+    <?php echo $uploadDir.$imageName.'-1050px.jpg' ?> 1050w,
+    <?php echo $uploadDir.$imageName.'-1200px.jpg' ?> 1200w,
+    <?php echo $uploadDir.$imageName.'-1350px.jpg' ?> 1350w,
+    <?php echo $uploadDir.$imageName.'-1500px.jpg' ?> 1500w,
+    <?php echo $uploadDir.$imageName.'-1750px.jpg' ?> 1750w
+    '
+    sizes='100vw'
+    >
+    <img src='<?php echo $uploadDir.$imageName.'-1050px.jpg' ?>' alt='test'>
+  </picture>
+  <?php
+}
+add_action('ddd_add_responsive_image', 'ddd_image_responsive', 10);
 ?>

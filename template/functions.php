@@ -45,9 +45,9 @@ function ddd_conditional_serve() {
       wp_enqueue_script('3dcustom');
     }
   }
-  wp_enqueue_style('3dcustomMobile', get_stylesheet_directory_uri().'/style-test.css', false, null, 'all');
-  wp_enqueue_style('3dcustomTablet', get_stylesheet_directory_uri().'/only-screen-and-min-width768px.css', false, null, '(min-width: 768px)');
-  wp_enqueue_style('3dcustomDesktop', get_stylesheet_directory_uri().'/only-screen-and-min-width1024px.css', false, null, '(min-width: 1024px)');
+  wp_enqueue_style('3dcustomMobile', get_stylesheet_directory_uri().'/styles/style.css', false, null, 'all');
+  wp_enqueue_style('3dcustomTablet', get_stylesheet_directory_uri().'/styles/only-screen-and-min-width-768px.css', false, null, '(min-width: 768px)');
+  wp_enqueue_style('3dcustomDesktop', get_stylesheet_directory_uri().'/styles/only-screen-and-min-width-1024px.css', false, null, '(min-width: 1024px)');
 }
 add_action( 'wp_enqueue_scripts', 'ddd_conditional_serve', 40 );
 

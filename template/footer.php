@@ -25,7 +25,7 @@
 </div><!-- #page -->
 
 <?php wp_footer();
-$obj = new DDDToolBox();
+// $obj = new DDDToolBox();
   // console_log($obj->getCurrentURL());
 	// console_log($obj->getUploadDir());
 ?>

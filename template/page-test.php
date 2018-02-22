@@ -7,7 +7,7 @@
 // get_header();
 $imageDir = 'test/' ?>
 
-@@include('content.html')
+<!-- @@include('content.html') -->
 
 <picture>
   <source

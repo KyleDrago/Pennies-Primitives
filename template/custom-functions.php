@@ -144,7 +144,6 @@ add_action('ddd_add_color_selection_input', 'add_color_selection_input', 10);
 
 function add_pattern_selection_input($pers) {
   $imageDir = content_url() . "/uploads/";
-
   $patternArray = array(
     "Daisypatch",
     "Anchors",
@@ -190,9 +189,22 @@ function add_pattern_selection_input($pers) {
       <div class="masonry">
         <?php for ($i = 0; $i < count($patternArray); $i++) {
           $pat = $patternArray[$i];
-        ?>
-        <img id='<?php echo $pat ?>' class="lightbox-pattern-img" data-value="<?php echo $pat ?>" src="<?php echo $imageDir?><?php echo $pat ?>.jpg">
-        <?php } ?>
+
+          do_action('ddd_add_responsive_image',
+          [
+          $pat,
+          '15vw',
+          null,
+          '50vw',
+          null,
+          '100vw',
+          'Pattern',
+          'lightbox-pattern-img',
+          $pat,
+          $pat
+          ]);
+
+        } ?>
       </div>
     </div>
   <div class="pattern-select-wrapper">
@@ -213,7 +225,19 @@ add_action('ddd_add_pattern_selection_input', 'add_pattern_selection_input', 10)
 
 // Add responsive image ----------------------------------------------------------------------------------//
 // Usage:
-// do_action('ddd_add_responsive_image', ['Beautiful-Beach-Landscape', '20vw', null, '50vw', null, '100vw', 'This Is The Alt Text', 'home-page-image']);
+// do_action('ddd_add_responsive_image',
+// [
+// 'image name desktop',
+// 'image width desktop',
+// 'image name tablet',
+// 'image width tablet',
+// 'image name mobile',
+// 'image width mobile',
+// 'alt text',
+// 'class',
+// 'id',
+// 'data-value'
+// ]);
 // Args: Desktop Image Name (no ext), Approx Desktop image width in vw, Tablet Image Name, Tablet Image Width, Mobile Image, Mobile Image Width, Alt Text, Classname
 
 function ddd_image_responsive($args) {
@@ -248,9 +272,19 @@ function ddd_image_responsive($args) {
     $altText = 'Default';
   }
   if (isset($args[7])) {
-    $className = $args[7];
+    $className = 'class="'.$args[7].'"';
   } else {
-    $className = "ddd-image";
+    $className = null;
+  }
+  if (isset($args[8])) {
+    $id = 'id="'.$args[8].'"';
+  } else {
+    $id = null;
+  }
+  if (isset($args[9])) {
+    $dataValue = 'data-value="'.$args[9].'"';
+  } else {
+    $dataValue = null;
   }
   ?>
   <picture>
@@ -283,7 +317,16 @@ function ddd_image_responsive($args) {
     media='<?php echo $desktopBreakpoint ?>'
     srcset=
     '
-    <?php echo $uploadDir.$imageNameTablet.'-900px.webp' ?> 900w
+    <?php echo $uploadDir.$imageNameTablet.'-300px.webp' ?> 300w,
+    <?php echo $uploadDir.$imageNameTablet.'-450px.webp' ?> 450w,
+    <?php echo $uploadDir.$imageNameTablet.'-600px.webp' ?> 600w,
+    <?php echo $uploadDir.$imageNameTablet.'-750px.webp' ?> 750w,
+    <?php echo $uploadDir.$imageNameTablet.'-900px.webp' ?> 900w,
+    <?php echo $uploadDir.$imageNameTablet.'-1050px.webp' ?> 1050w,
+    <?php echo $uploadDir.$imageNameTablet.'-1200px.webp' ?> 1200w,
+    <?php echo $uploadDir.$imageNameTablet.'-1350px.webp' ?> 1350w,
+    <?php echo $uploadDir.$imageNameTablet.'-1500px.webp' ?> 1500w,
+    <?php echo $uploadDir.$imageNameTablet.'-1750px.webp' ?> 1750w
     '
     sizes='<?php echo $imageWidthTablet ?>'
     >
@@ -292,7 +335,16 @@ function ddd_image_responsive($args) {
     media='<?php echo $desktopBreakpoint ?>'
     srcset=
     '
-    <?php echo $uploadDir.$imageNameTablet.'-900px.jpg' ?> 900w
+    <?php echo $uploadDir.$imageNameTablet.'-300px.jpg' ?> 300w,
+    <?php echo $uploadDir.$imageNameTablet.'-450px.jpg' ?> 450w,
+    <?php echo $uploadDir.$imageNameTablet.'-600px.jpg' ?> 600w,
+    <?php echo $uploadDir.$imageNameTablet.'-750px.jpg' ?> 750w,
+    <?php echo $uploadDir.$imageNameTablet.'-900px.jpg' ?> 900w,
+    <?php echo $uploadDir.$imageNameTablet.'-1050px.jpg' ?> 1050w,
+    <?php echo $uploadDir.$imageNameTablet.'-1200px.jpg' ?> 1200w,
+    <?php echo $uploadDir.$imageNameTablet.'-1350px.jpg' ?> 1350w,
+    <?php echo $uploadDir.$imageNameTablet.'-1500px.jpg' ?> 1500w,
+    <?php echo $uploadDir.$imageNameTablet.'-1750px.jpg' ?> 1750w
     '
     sizes='<?php echo $imageWidthTablet ?>'
     >
@@ -330,7 +382,7 @@ function ddd_image_responsive($args) {
     '
     sizes='<?php echo $imageWidthDesktop ?>'
     >
-    <img class="<?php echo $className ?>" src='<?php echo $uploadDir.$imageNameDesktop.'-1050px.jpg' ?>' alt='<?php echo $altText ?>'>
+    <img <?php echo $className ?> <?php echo $id ?> <?php echo $dataValue ?> src='<?php echo $uploadDir.$imageNameDesktop.'-1050px.jpg' ?>' alt='<?php echo $altText ?>'>
   </picture>
   <?php
 }

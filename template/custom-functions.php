@@ -192,9 +192,9 @@ function add_pattern_selection_input($pers) {
           do_action('ddd_add_responsive_image',
           [
             'desktopName' => $pat,
-            'desktopWidth' => '15vw',
+            'desktopWidth' => '12vw',
             'tabletName' => null,
-            'tabletWidth' => '50vw',
+            'tabletWidth' => '45vw',
             'mobileName' => null,
             'mobileWidth' => '100vw',
             'altText' => 'Available Pattern',
@@ -245,9 +245,17 @@ function ddd_image_responsive($args) {
 
   $imageNameDesktop = $args['desktopName'];
   $imageWidthDesktop = $args['desktopWidth'];
-  $imageNameTablet = $args['tabletWidth'];
+  if (isset($args['tabletName'])) {
+    $imageNameTablet = $args['tabletName'];
+  } else {
+    $imageNameTablet = $imageNameDesktop;
+  }
   $imageWidthTablet = $args['tabletWidth'];
-  $imageNameMobile = $args['mobileName'];
+  if (isset($args['mobileName'])) {
+    $imageNameMobile = $args['mobileName'];
+  } else {
+    $imageNameMobile = $imageNameDesktop;
+  }
   $imageWidthMobile = $args['mobileWidth'];
   $altText = $args['altText'];
   $className = 'class="'.$args['class'].'"';
@@ -293,7 +301,8 @@ function ddd_image_responsive($args) {
     <?php echo $uploadDir.$imageNameTablet.'-1200px.webp' ?> 1200w,
     <?php echo $uploadDir.$imageNameTablet.'-1350px.webp' ?> 1350w,
     <?php echo $uploadDir.$imageNameTablet.'-1500px.webp' ?> 1500w,
-    <?php echo $uploadDir.$imageNameTablet.'-1750px.webp' ?> 1750w
+    <?php echo $uploadDir.$imageNameTablet.'-1750px.webp' ?> 1750w,
+    <?php echo $uploadDir.$imageNameTablet.'-1900px.webp' ?> 1900w
     '
     sizes='<?php echo $imageWidthTablet ?>'
     >
@@ -311,7 +320,8 @@ function ddd_image_responsive($args) {
     <?php echo $uploadDir.$imageNameTablet.'-1200px.jpg' ?> 1200w,
     <?php echo $uploadDir.$imageNameTablet.'-1350px.jpg' ?> 1350w,
     <?php echo $uploadDir.$imageNameTablet.'-1500px.jpg' ?> 1500w,
-    <?php echo $uploadDir.$imageNameTablet.'-1750px.jpg' ?> 1750w
+    <?php echo $uploadDir.$imageNameTablet.'-1750px.jpg' ?> 1750w,
+    <?php echo $uploadDir.$imageNameTablet.'-1900px.jpg' ?> 1900w
     '
     sizes='<?php echo $imageWidthTablet ?>'
     >
@@ -328,7 +338,8 @@ function ddd_image_responsive($args) {
     <?php echo $uploadDir.$imageNameDesktop.'-1200px.webp' ?> 1200w,
     <?php echo $uploadDir.$imageNameDesktop.'-1350px.webp' ?> 1350w,
     <?php echo $uploadDir.$imageNameDesktop.'-1500px.webp' ?> 1500w,
-    <?php echo $uploadDir.$imageNameDesktop.'-1750px.webp' ?> 1750w
+    <?php echo $uploadDir.$imageNameDesktop.'-1750px.webp' ?> 1750w,
+    <?php echo $uploadDir.$imageNameDesktop.'-1900px.webp' ?> 1900w
     '
     sizes='<?php echo $imageWidthDesktop ?>'
     >
@@ -345,7 +356,8 @@ function ddd_image_responsive($args) {
     <?php echo $uploadDir.$imageNameDesktop.'-1200px.jpg' ?> 1200w,
     <?php echo $uploadDir.$imageNameDesktop.'-1350px.jpg' ?> 1350w,
     <?php echo $uploadDir.$imageNameDesktop.'-1500px.jpg' ?> 1500w,
-    <?php echo $uploadDir.$imageNameDesktop.'-1750px.jpg' ?> 1750w
+    <?php echo $uploadDir.$imageNameDesktop.'-1750px.jpg' ?> 1750w,
+    <?php echo $uploadDir.$imageNameDesktop.'-1900px.jpg' ?> 1900w
     '
     sizes='<?php echo $imageWidthDesktop ?>'
     >

@@ -189,21 +189,19 @@ function add_pattern_selection_input($pers) {
       <div class="masonry">
         <?php for ($i = 0; $i < count($patternArray); $i++) {
           $pat = $patternArray[$i];
-
           do_action('ddd_add_responsive_image',
           [
-          $pat,
-          '15vw',
-          null,
-          '50vw',
-          null,
-          '100vw',
-          'Pattern',
-          'lightbox-pattern-img',
-          $pat,
-          $pat
+            'desktopName' => $pat,
+            'desktopWidth' => '15vw',
+            'tabletName' => null,
+            'tabletWidth' => '50vw',
+            'mobileName' => null,
+            'mobileWidth' => '100vw',
+            'altText' => 'Available Pattern',
+            'class' => 'lightbox-pattern-img',
+            'id' => $pat,
+            'dataValue' => $pat
           ]);
-
         } ?>
       </div>
     </div>
@@ -227,65 +225,34 @@ add_action('ddd_add_pattern_selection_input', 'add_pattern_selection_input', 10)
 // Usage:
 // do_action('ddd_add_responsive_image',
 // [
-// 'image name desktop',
-// 'image width desktop',
-// 'image name tablet',
-// 'image width tablet',
-// 'image name mobile',
-// 'image width mobile',
-// 'alt text',
-// 'class',
-// 'id',
-// 'data-value'
+//   'desktopName' => 'desk image',
+//   'desktopWidth' => '25vw',
+//   'tabletName' => null,
+//   'tabletWidth' => '25vw',
+//   'mobileName' => null,
+//   'mobileWidth' => '95vw',
+//   'altText' => null,
+//   'class' => null,
+//   'id' => null,
+//   'dataValue' => null
 // ]);
-// Args: Desktop Image Name (no ext), Approx Desktop image width in vw, Tablet Image Name, Tablet Image Width, Mobile Image, Mobile Image Width, Alt Text, Classname
 
 function ddd_image_responsive($args) {
   $uploadDir = '//'.$_SERVER['HTTP_HOST'].'/wp-content/uploads/'.'responsive/';
+
   $tabletBreakpoint = '(max-width: 768px)';
   $desktopBreakpoint = '(max-width: 1024px)';
-  $imageNameDesktop = $args[0];
-  $imageWidthDesktop = $args[1];
-  if (isset($args[2])) {
-    $imageNameTablet = $args[2];
-  } else {
-    $imageNameTablet = $imageNameDesktop;
-  }
-  if (isset($args[3])) {
-    $imageWidthTablet = $args[3];
-  } else {
-    $imageWidthTablet = $imageWidthDesktop;
-  }
-  if (isset($args[4])) {
-    $imageNameMobile = $args[4];
-  } else {
-    $imageNameMobile = $imageNameDesktop;
-  }
-  if (isset($args[5])) {
-    $imageWidthMobile = $args[5];
-  } else {
-    $imageWidthMobile = $imageWidthDesktop;
-  }
-  if (isset($args[6])) {
-    $altText = $args[6];
-  } else {
-    $altText = 'Default';
-  }
-  if (isset($args[7])) {
-    $className = 'class="'.$args[7].'"';
-  } else {
-    $className = null;
-  }
-  if (isset($args[8])) {
-    $id = 'id="'.$args[8].'"';
-  } else {
-    $id = null;
-  }
-  if (isset($args[9])) {
-    $dataValue = 'data-value="'.$args[9].'"';
-  } else {
-    $dataValue = null;
-  }
+
+  $imageNameDesktop = $args['desktopName'];
+  $imageWidthDesktop = $args['desktopWidth'];
+  $imageNameTablet = $args['tabletWidth'];
+  $imageWidthTablet = $args['tabletWidth'];
+  $imageNameMobile = $args['mobileName'];
+  $imageWidthMobile = $args['mobileWidth'];
+  $altText = $args['altText'];
+  $className = 'class="'.$args['class'].'"';
+  $id = 'id="'.$args['id'].'"';
+  $dataValue = 'data-value="'.$args['dataValue'].'"';
   ?>
   <picture>
     <source

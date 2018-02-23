@@ -213,14 +213,45 @@ add_action('ddd_add_pattern_selection_input', 'add_pattern_selection_input', 10)
 
 // Add responsive image ----------------------------------------------------------------------------------//
 // Usage:
+// do_action('ddd_add_responsive_image', ['Beautiful-Beach-Landscape', '20vw', null, '50vw', null, '100vw', 'This Is The Alt Text', 'home-page-image']);
+// Args: Desktop Image Name (no ext), Approx Desktop image width in vw, Tablet Image Name, Tablet Image Width, Mobile Image, Mobile Image Width, Alt Text, Classname
 
-function ddd_image_responsive($imageName) {
+function ddd_image_responsive($args) {
   $uploadDir = '//'.$_SERVER['HTTP_HOST'].'/wp-content/uploads/'.'responsive/';
   $tabletBreakpoint = '(max-width: 768px)';
   $desktopBreakpoint = '(max-width: 1024px)';
-  // $tabletBreakpoint = ;
-  // $desktopBreakpoint = '1024px';
-  // $uploadDir = $toolBox->getUploadDir().'responsive/';
+  $imageNameDesktop = $args[0];
+  $imageWidthDesktop = $args[1];
+  if (isset($args[2])) {
+    $imageNameTablet = $args[2];
+  } else {
+    $imageNameTablet = $imageNameDesktop;
+  }
+  if (isset($args[3])) {
+    $imageWidthTablet = $args[3];
+  } else {
+    $imageWidthTablet = $imageWidthDesktop;
+  }
+  if (isset($args[4])) {
+    $imageNameMobile = $args[4];
+  } else {
+    $imageNameMobile = $imageNameDesktop;
+  }
+  if (isset($args[5])) {
+    $imageWidthMobile = $args[5];
+  } else {
+    $imageWidthMobile = $imageWidthDesktop;
+  }
+  if (isset($args[6])) {
+    $altText = $args[6];
+  } else {
+    $altText = 'Default';
+  }
+  if (isset($args[7])) {
+    $className = $args[7];
+  } else {
+    $className = "ddd-image";
+  }
   ?>
   <picture>
     <source
@@ -228,70 +259,78 @@ function ddd_image_responsive($imageName) {
     media='<?php echo $tabletBreakpoint ?>'
     srcset=
     '
-    <?php echo $uploadDir.$imageName.'-300px.webp' ?> 300w,
-    <?php echo $uploadDir.$imageName.'-450px.webp' ?> 450w,
-    <?php echo $uploadDir.$imageName.'-600px.webp' ?> 600w,
-    <?php echo $uploadDir.$imageName.'-750px.webp' ?> 750w,
+    <?php echo $uploadDir.$imageNameMobile.'-300px.webp' ?> 300w,
+    <?php echo $uploadDir.$imageNameMobile.'-450px.webp' ?> 450w,
+    <?php echo $uploadDir.$imageNameMobile.'-600px.webp' ?> 600w,
+    <?php echo $uploadDir.$imageNameMobile.'-750px.webp' ?> 750w
     '
-    sizes='100vw'
+    sizes='<?php echo $imageWidthMobile ?>'
     >
     <source
     type='image/jpeg'
     media='<?php echo $tabletBreakpoint ?>'
     srcset=
     '
-    <?php echo $uploadDir.$imageName.'-300px.jpg' ?> 300w,
-    <?php echo $uploadDir.$imageName.'-450px.jpg' ?> 450w,
-    <?php echo $uploadDir.$imageName.'-600px.jpg' ?> 600w,
-    <?php echo $uploadDir.$imageName.'-750px.jpg' ?> 750w,
+    <?php echo $uploadDir.$imageNameMobile.'-300px.jpg' ?> 300w,
+    <?php echo $uploadDir.$imageNameMobile.'-450px.jpg' ?> 450w,
+    <?php echo $uploadDir.$imageNameMobile.'-600px.jpg' ?> 600w,
+    <?php echo $uploadDir.$imageNameMobile.'-750px.jpg' ?> 750w
     '
-    sizes='100vw'
+    sizes='<?php echo $imageWidthMobile ?>'
     >
     <source
     type='image/webp'
     media='<?php echo $desktopBreakpoint ?>'
     srcset=
     '
-    <?php echo $uploadDir.$imageName.'-900px.webp' ?> 900w
+    <?php echo $uploadDir.$imageNameTablet.'-900px.webp' ?> 900w
     '
-    sizes='100vw'
+    sizes='<?php echo $imageWidthTablet ?>'
     >
     <source
     type='image/jpeg'
     media='<?php echo $desktopBreakpoint ?>'
     srcset=
     '
-    <?php echo $uploadDir.$imageName.'-900px.jpg' ?> 900w
+    <?php echo $uploadDir.$imageNameTablet.'-900px.jpg' ?> 900w
     '
-    sizes='100vw'
+    sizes='<?php echo $imageWidthTablet ?>'
     >
     <source
     type='image/webp'
-    media='<?php echo $desktopBreakpoint ?>'
     srcset=
     '
-    <?php echo $uploadDir.$imageName.'-1050px.webp' ?> 1050w,
-    <?php echo $uploadDir.$imageName.'-1200px.webp' ?> 1200w,
-    <?php echo $uploadDir.$imageName.'-1350px.webp' ?> 1350w,
-    <?php echo $uploadDir.$imageName.'-1500px.webp' ?> 1500w,
-    <?php echo $uploadDir.$imageName.'-1750px.webp' ?> 1750w
+    <?php echo $uploadDir.$imageNameDesktop.'-300px.webp' ?> 300w,
+    <?php echo $uploadDir.$imageNameDesktop.'-450px.webp' ?> 450w,
+    <?php echo $uploadDir.$imageNameDesktop.'-600px.webp' ?> 600w,
+    <?php echo $uploadDir.$imageNameDesktop.'-750px.webp' ?> 750w,
+    <?php echo $uploadDir.$imageNameDesktop.'-900px.webp' ?> 900w,
+    <?php echo $uploadDir.$imageNameDesktop.'-1050px.webp' ?> 1050w,
+    <?php echo $uploadDir.$imageNameDesktop.'-1200px.webp' ?> 1200w,
+    <?php echo $uploadDir.$imageNameDesktop.'-1350px.webp' ?> 1350w,
+    <?php echo $uploadDir.$imageNameDesktop.'-1500px.webp' ?> 1500w,
+    <?php echo $uploadDir.$imageNameDesktop.'-1750px.webp' ?> 1750w
     '
-    sizes='100vw'
+    sizes='<?php echo $imageWidthDesktop ?>'
     >
     <source
     type='image/jpeg'
-    media='<?php echo $desktopBreakpoint ?>'
     srcset=
     '
-    <?php echo $uploadDir.$imageName.'-1050px.jpg' ?> 1050w,
-    <?php echo $uploadDir.$imageName.'-1200px.jpg' ?> 1200w,
-    <?php echo $uploadDir.$imageName.'-1350px.jpg' ?> 1350w,
-    <?php echo $uploadDir.$imageName.'-1500px.jpg' ?> 1500w,
-    <?php echo $uploadDir.$imageName.'-1750px.jpg' ?> 1750w
+    <?php echo $uploadDir.$imageNameDesktop.'-300px.jpg' ?> 300w,
+    <?php echo $uploadDir.$imageNameDesktop.'-450px.jpg' ?> 450w,
+    <?php echo $uploadDir.$imageNameDesktop.'-600px.jpg' ?> 600w,
+    <?php echo $uploadDir.$imageNameDesktop.'-750px.jpg' ?> 750w,
+    <?php echo $uploadDir.$imageNameDesktop.'-900px.jpg' ?> 900w,
+    <?php echo $uploadDir.$imageNameDesktop.'-1050px.jpg' ?> 1050w,
+    <?php echo $uploadDir.$imageNameDesktop.'-1200px.jpg' ?> 1200w,
+    <?php echo $uploadDir.$imageNameDesktop.'-1350px.jpg' ?> 1350w,
+    <?php echo $uploadDir.$imageNameDesktop.'-1500px.jpg' ?> 1500w,
+    <?php echo $uploadDir.$imageNameDesktop.'-1750px.jpg' ?> 1750w
     '
-    sizes='100vw'
+    sizes='<?php echo $imageWidthDesktop ?>'
     >
-    <img src='<?php echo $uploadDir.$imageName.'-1050px.jpg' ?>' alt='test'>
+    <img class="<?php echo $className ?>" src='<?php echo $uploadDir.$imageNameDesktop.'-1050px.jpg' ?>' alt='<?php echo $altText ?>'>
   </picture>
   <?php
 }
